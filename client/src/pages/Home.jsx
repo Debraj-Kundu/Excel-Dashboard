@@ -10,12 +10,7 @@ import {
   TableRow,
 } from "@mui/material";
 import axios from "axios";
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useState, Suspense, lazy } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
@@ -23,10 +18,11 @@ import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import formatDate from "../utils/dateFormat";
 import toast from "react-hot-toast";
-import SearchBar from "../components/Search/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import useDebounce from "../hooks/useDebounce";
 import { updateSearchKey } from "../redux/searchSlice";
+
+const SearchBar = lazy(() =>  import("../components/Search/SearchBar"));
 
 const URL = `${process.env.REACT_APP_SERVER_URL}/spreadsheet`;
 const QUERY_URL = `${process.env.REACT_APP_SERVER_URL}/util`;

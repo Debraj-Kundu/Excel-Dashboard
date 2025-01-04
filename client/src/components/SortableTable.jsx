@@ -35,7 +35,6 @@ import download from "downloadjs";
 import toast from "react-hot-toast";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const URL = `${process.env.REACT_APP_SERVER_URL}/spreadsheet/`;
 

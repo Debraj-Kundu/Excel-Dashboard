@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import BasicTable from "../Table";
+import React, { useEffect, useState, Suspense, lazy } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import SortableTable from "../components/SortableTable";
-import GroupTable from "../components/Group/GroupTable";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { Button } from "@mui/material";
+
+const SortableTable = lazy(() => import( "../components/SortableTable"));
+const GroupTable = lazy(() => import( "../components/Group/GroupTable"));
 
 const URL = `${process.env.REACT_APP_SERVER_URL}/spreadsheet`;
 
