@@ -24,7 +24,7 @@ const ControlledInput = (props) => {
 
   return (
     <input
-      className="px-4 py-1 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      className="px-4 py-1 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
       ref={ref}
       value={value}
       onChange={handleChange}

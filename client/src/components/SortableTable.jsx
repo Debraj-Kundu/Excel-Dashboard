@@ -112,8 +112,6 @@ const SortableTable = (props) => {
   const [fixedRowContainers, setFixedRowContainers] = useState([]);
   const [fixedColContainers, setFixedColContainers] = useState([]);
   console.log("CONTAINERS - ", containers);
-  // console.log("Col id - ", columnIds);
-  // console.log("row id - ", rowIds);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -364,7 +362,6 @@ const SortableTable = (props) => {
     downloadFile(filename);
   };
 
-  // console.log(fixedRowContainers);
   return (
     <>
       {isEditMode ? (
@@ -381,6 +378,7 @@ const SortableTable = (props) => {
           <Button variant="contained" color="success" onClick={handleSubmit}>
             Submit
           </Button>
+          <Button variant="contained" color="error" onClick={() => setIsEditMode(false)} >cancel</Button>
         </>
       ) : (
         <>
@@ -389,17 +387,11 @@ const SortableTable = (props) => {
             fontSize="large"
             className="text-gray-500 cursor-pointer"
           />
-          {/* <Button onClick={handleEditClick} variant="contained" color="primary">
-            Edit
-          </Button> */}
           <FileDownloadIcon
             className="text-gray-500 cursor-pointer"
             fontSize="large"
             onClick={downloadExcel}
           />
-          {/* <Button variant="contained" color="success" onClick={downloadExcel}>
-            Export
-          </Button> */}
         </>
       )}
       <div className="flex flex-col items-center justify-center mt-10">

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, Suspense, lazy } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { Button } from "@mui/material";
 
-const SortableTable = lazy(() => import( "../components/SortableTable"));
-const GroupTable = lazy(() => import( "../components/Group/GroupTable"));
+const SortableTable = lazy(() => import("../components/SortableTable"));
+const GroupTable = lazy(() => import("../components/Group/GroupTable"));
 
 const URL = `${process.env.REACT_APP_SERVER_URL}/spreadsheet`;
 
@@ -45,21 +45,19 @@ const PivotTable = (props) => {
   return (
     <div>
       {toggleMode ? (
-        <Button
-          variant="contained"
-          className="bg-emerald-400"
+        <button
+          className="rounded-md bg-emerald-400 px-2 py-2 text-sm font-medium text-white shadow"
           onClick={() => setToggleMode(!toggleMode)}
         >
           <SwapVertIcon /> Sort Mode
-        </Button>
+        </button>
       ) : (
-        <Button
-          variant="contained"
-          className="bg-emerald-400"
+        <button
+          className="rounded-md bg-emerald-400 px-2 py-2 text-sm font-medium text-white shadow"
           onClick={() => setToggleMode(!toggleMode)}
         >
           <VisibilityIcon /> View Mode
-        </Button>
+        </button>
       )}
 
       {toggleMode ? (

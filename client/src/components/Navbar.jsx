@@ -72,24 +72,24 @@ const Navbar = () => {
                   <li>
                     <Link
                       to="/upload"
-                      className="text-gray-500 transition hover:text-gray-500/75"
+                      className="text-gray-500 transition hover:text-emerald-500/75"
                     >
-                      <FileUploadIcon /> Upload
+                      <FileUploadIcon className='text-emerald-400' /> Upload
                     </Link>
                   </li>
 
                   <li>
                     <Link
                       to="/scratch"
-                      className="text-gray-500 transition hover:text-gray-500/75"
+                      className="text-gray-500 transition hover:text-emerald-500/75"
                     >
-                      <EditNoteIcon />
+                      <EditNoteIcon className='text-emerald-400' />
                       Scratch
                     </Link>
                   </li>
                   {user && (
                     <li>
-                      <p className="text-gray-500 transition hover:text-gray-500/75">
+                      <p className="text-gray-500 transition hover:text-emerald-500/75">
                         Welcome, {user.name}!
                       </p>
                     </li>

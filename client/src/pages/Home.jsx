@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useDebounce from "../hooks/useDebounce";
 import { updateSearchKey } from "../redux/searchSlice";
 
-const SearchBar = lazy(() =>  import("../components/Search/SearchBar"));
+const SearchBar = lazy(() => import("../components/Search/SearchBar"));
 
 const URL = `${process.env.REACT_APP_SERVER_URL}/spreadsheet`;
 const QUERY_URL = `${process.env.REACT_APP_SERVER_URL}/util`;
@@ -146,6 +146,11 @@ const Home = () => {
     return (
       <div>
         <h3>Nothing to show :(</h3>
+        <img
+          loading="lazy"
+          src={`${process.env.PUBLIC_URL}/NothingToShow.svg`}
+          alt="Nothing to show"
+        />
         <Link to="/login">
           <Button variant="contained" color="success">
             Login
@@ -167,7 +172,6 @@ const Home = () => {
               borderRadius: 3,
               boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
             }}
-            /*sx={{ width: "100%", overflow: "hidden" }}*/
           >
             <TableContainer sx={{ maxHeight: 400 }}>
               <Table stickyHeader size="small" aria-label="sticky table">
@@ -216,7 +220,7 @@ const Home = () => {
                               </div>
                             ) : (
                               <h3
-                                className="text-lg cursor-pointer"
+                                className="text-lg cursor-pointer hover:text-emerald-400"
                                 onClick={() => handleClick(item.id)}
                               >
                                 {item.filename}
@@ -272,7 +276,18 @@ const Home = () => {
         </>
       ) : (
         <>
-          <h3>Loading ...</h3>
+          {searchKey.length > 0 ? (
+            <>
+            <h3>No search results</h3>
+            <img
+              loading="lazy"
+              src={`${process.env.PUBLIC_URL}/NotFound.svg`}
+              alt="Not found"
+            />
+            </>
+          ) : (
+            <h3>Loading ...</h3>
+          )}
         </>
       )}
     </>
