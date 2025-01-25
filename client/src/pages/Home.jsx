@@ -27,6 +27,16 @@ const SearchBar = lazy(() => import("../components/Search/SearchBar"));
 const URL = `${process.env.REACT_APP_SERVER_URL}/spreadsheet`;
 const QUERY_URL = `${process.env.REACT_APP_SERVER_URL}/util`;
 
+const TableHeaders = React.memo(() => (
+  <>
+    {["File", "Last Modified", "Actions"].map((item, i) => (
+      <TableCell key={i}>
+        <span className="text-lg font-semibold">{item}</span>
+      </TableCell>
+    ))}
+  </>
+));
+
 const Home = () => {
   const [files, setFiles] = useState([]);
   const [errMsg, setErrMsg] = useState("");
@@ -144,17 +154,20 @@ const Home = () => {
 
   if (!user) {
     return (
-      <div>
+      <div className="mt-8 flex flex-col gap-8 items-center">
         <h3>Nothing to show :(</h3>
         <img
           loading="lazy"
+          height="500px"
+          width="500px"
           src={`${process.env.PUBLIC_URL}/NothingToShow.svg`}
           alt="Nothing to show"
         />
-        <Link to="/login">
-          <Button variant="contained" color="success">
-            Login
-          </Button>
+        <Link
+          to="/login"
+          className="rounded-md bg-emerald-400 px-5 py-2.5 text-sm font-medium text-white shadow"
+        >
+          LOGIN
         </Link>
         <h3>{errMsg}</h3>{" "}
       </div>
@@ -176,13 +189,7 @@ const Home = () => {
             <TableContainer sx={{ maxHeight: 400 }}>
               <Table stickyHeader size="small" aria-label="sticky table">
                 <TableHead>
-                  <TableRow>
-                    {["File", "Last Modified", "Actions"].map((item, i) => (
-                      <TableCell key={i}>
-                        <h2 className="text-2xl font-bold">{item}</h2>
-                      </TableCell>
-                    ))}
-                  </TableRow>
+                  <TableHeaders />
                 </TableHead>
                 <TableBody>
                   {files
@@ -278,12 +285,12 @@ const Home = () => {
         <>
           {searchKey.length > 0 ? (
             <>
-            <h3>No search results</h3>
-            <img
-              loading="lazy"
-              src={`${process.env.PUBLIC_URL}/NotFound.svg`}
-              alt="Not found"
-            />
+              <h3>No search results</h3>
+              <img
+                loading="lazy"
+                src={`${process.env.PUBLIC_URL}/NotFound.svg`}
+                alt="Not found"
+              />
             </>
           ) : (
             <h3>Loading ...</h3>

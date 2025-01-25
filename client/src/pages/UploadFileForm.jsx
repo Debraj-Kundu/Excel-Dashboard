@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import DescriptionIcon from "@mui/icons-material/Description";
 
 const URL = `${process.env.REACT_APP_SERVER_URL}/spreadsheet`;
 const validMimeTypes = [
@@ -42,9 +44,60 @@ const UploadFileForm = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" accept={validMimeTypes} onChange={handleChange} />
-      <button type="submit">Upload</button>
+    <form
+      onSubmit={handleSubmit}
+      className="mt-8 ml-40 mr-40 p-5 flex flex-col gap-4 align-center justify-center border border-gray-500 border-dashed rounded-lg"
+    >
+      {!file && (
+        <div>
+          <label
+            htmlFor="file"
+            className="flex justify-center hover:opacity-75 hover:scale-105 cursor-pointer transition-transform duration-200"
+          >
+            <img
+              loading="lazy"
+              height="500px"
+              width="500px"
+              src={`${process.env.PUBLIC_URL}/FileUpload.svg`}
+              alt="File Upload"
+            />
+          </label>
+        </div>
+      )}
+      {file && (
+        <div className="flex justify-center">
+          <img
+            loading="lazy"
+            height="500px"
+            width="500px"
+            src={`${process.env.PUBLIC_URL}/ReadyToUpload.svg`}
+            alt="Ready to Upload"
+          />
+        </div>
+      )}
+      <input
+        className="hidden"
+        type="file"
+        id="file"
+        accept={validMimeTypes}
+        onChange={handleChange}
+      />
+      {file && (
+        <div className="flex justify-center items-center text-sm text-gray-600">
+          <DescriptionIcon fontSize="large" className="mr-2 text-gray-500" />
+          <p>
+            <b>{file.name}</b> is ready to upload!
+          </p>
+        </div>
+      )}
+      <div className="flex justify-center">
+        <button
+          className="rounded-md bg-emerald-400 px-2 py-2 text-sm font-medium text-white shadow"
+          type="submit"
+        >
+          <CloudUploadIcon /> Upload
+        </button>
+      </div>
     </form>
   );
 };

@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { storeUserDetails } from "../redux/userSlice";
+import TextField from "@mui/material/TextField";
 
 const URL = `${process.env.REACT_APP_SERVER_URL}`;
 
@@ -65,22 +66,73 @@ const Login = ({ login }) => {
   }
 
   return (
-    <>
+    <div className="mt-12">
       {login ? (
-        <form onSubmit={handleClick}>
-          <input type="email" name="email" onChange={handleChange} />
-          <input type="password" name="password" onChange={handleChange} />
-          <button type="submit">Login</button>
+        <form
+          onSubmit={handleClick}
+          className="flex flex-col gap-4 items-center"
+        >
+          <TextField
+            id="outlined-basic"
+            label="Email address"
+            type="email"
+            name="email"
+            onChange={handleChange}
+            variant="outlined"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Password"
+            type="password"
+            name="password"
+            onChange={handleChange}
+            variant="outlined"
+          />
+          <button
+            className="rounded-md bg-emerald-400 px-5 py-2.5 text-sm font-medium text-white shadow"
+            type="submit"
+          >
+            Login
+          </button>
         </form>
       ) : (
-        <form onSubmit={handleRegister}>
-          <input type="textF" name="name" onChange={handleChange} />
-          <input type="email" name="email" onChange={handleChange} />
-          <input type="password" name="password" onChange={handleChange} />
-          <button type="submit">Login</button>
+        <form
+          onSubmit={handleRegister}
+          className="flex flex-col gap-4 items-center"
+        >
+          <TextField
+            id="outlined-basic"
+            label="Name"
+            type="text"
+            name="name"
+            onChange={handleChange}
+            variant="outlined"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Email address"
+            type="email"
+            name="email"
+            onChange={handleChange}
+            variant="outlined"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Password"
+            type="password"
+            name="password"
+            onChange={handleChange}
+            variant="outlined"
+          />
+          <button
+            type="submit"
+            className="rounded-md bg-emerald-400 px-5 py-2.5 text-sm font-medium text-white shadow"
+          >
+            Register
+          </button>
         </form>
       )}
-    </>
+    </div>
   );
 };
 
