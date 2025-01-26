@@ -73,7 +73,7 @@ const SortableTable = (props) => {
     .map((k, i) => ({
       id: getUID(),
       rowId: "row-" + 0,
-      colId: "col-" + i,
+      colId: "col-" + getUID(),
       data: k,
     }));
 
@@ -86,7 +86,7 @@ const SortableTable = (props) => {
         .map((k, i) => ({
           id: getUID(),
           rowId: "row-" + (idx + 1),
-          colId: "col-" + i,
+          colId: initData[0][i].colId,
           data: row[k],
         }))
     );
@@ -180,7 +180,8 @@ const SortableTable = (props) => {
       let newCont = [...containers];
       newCont = arrayMove(newCont, activeRowIndex, overRowIndex);
 
-      setContainers(newCont);
+      // setContainers(newCont);
+      dispatch(initialize(newCont));
       setRowIds(newCont.map((row) => row[0].rowId));
     }
 
@@ -216,7 +217,8 @@ const SortableTable = (props) => {
       newCont.forEach((row, i) => {
         newCont[i] = arrayMove(row, activeColIndex, overColIndex);
       });
-      setContainers(newCont);
+      // setContainers(newCont);
+      dispatch(initialize(newCont));
       setColumnIds(newCont[0].map((items) => items.colId));
     }
     setActiveId(null);
@@ -273,7 +275,7 @@ const SortableTable = (props) => {
 
   const addCol = () => {
     let newData = JSON.parse(JSON.stringify(containers));
-    const colLen = newData[0].length;
+    // const colLen = newData[0].length;
     const uColId = getUID();
     newData.forEach((row, i) => {
       const obj = {
@@ -327,6 +329,7 @@ const SortableTable = (props) => {
   };
 
   const handleEditClick = () => {
+    console.log("Edit clicked");
     dispatch(captureStateBeforeEdit());
     setIsEditMode(true);
   };

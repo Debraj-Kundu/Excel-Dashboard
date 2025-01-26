@@ -13,11 +13,12 @@ const tableSlice = createSlice({
       state.present = action.payload;
       state.past.push(state.present);
       state.future = [];
+      console.log("Redux state - ", state.present);
     },
 
     updateCell: (state, action) => {
       const { rowId, colId, newData } = action.payload;
-      console.log("redux - ", rowId, colId, newData);
+      // console.log("redux - ", rowId, colId, newData);
       const newPresent = state.present.map((row) =>
         row.map((cell) =>
           cell.rowId === rowId && cell.colId === colId
@@ -25,7 +26,7 @@ const tableSlice = createSlice({
             : cell
         )
       );
-      console.log(newPresent);
+      // console.log(newPresent);
       state.past.push(state.present);
       state.present = newPresent;
       state.future = [];
