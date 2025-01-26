@@ -30,7 +30,14 @@ import {
 import Items from "./Items";
 import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
-import { initialize, updateCell, undo, redo } from "../redux/tableSlice";
+import {
+  initialize,
+  updateCell,
+  undo,
+  redo,
+  captureStateBeforeEdit,
+  revertBeforeEdit,
+} from "../redux/tableSlice";
 import download from "downloadjs";
 import toast from "react-hot-toast";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
@@ -111,6 +118,8 @@ const SortableTable = (props) => {
   const [isEditMode, setIsEditMode] = useState(props.isEditMode);
   const [fixedRowContainers, setFixedRowContainers] = useState([]);
   const [fixedColContainers, setFixedColContainers] = useState([]);
+  // const [dragged, setDragged] = useState(false);
+
   console.log("CONTAINERS - ", containers);
 
   useEffect(() => {
@@ -318,7 +327,13 @@ const SortableTable = (props) => {
   };
 
   const handleEditClick = () => {
+    dispatch(captureStateBeforeEdit());
     setIsEditMode(true);
+  };
+
+  const handleCancel = () => {
+    dispatch(revertBeforeEdit());
+    setIsEditMode(false);
   };
 
   const handelFixedRows = (rowAdd, rowRem) => {
@@ -378,7 +393,9 @@ const SortableTable = (props) => {
           <Button variant="contained" color="success" onClick={handleSubmit}>
             Submit
           </Button>
-          <Button variant="contained" color="error" onClick={() => setIsEditMode(false)} >cancel</Button>
+          <Button variant="contained" color="error" onClick={handleCancel}>
+            cancel
+          </Button>
         </>
       ) : (
         <>

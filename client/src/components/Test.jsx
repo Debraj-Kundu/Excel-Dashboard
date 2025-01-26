@@ -187,6 +187,7 @@ const Test = (props) => {
         return (
           <>
             <input
+              className="px-4 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               value={""}
               placeholder="Enter column name"
               onChange={fn}
@@ -205,7 +206,12 @@ const Test = (props) => {
         shouldSubmit = true;
         return (
           <>
-            <input value={col} onChange={fn} onBlur={handleBlur} />
+            <input
+              className="px-4 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              value={col}
+              onChange={fn}
+              onBlur={handleBlur}
+            />
             <DeleteRoundedIcon
               onClick={(e) => deleteCol(e, col)}
               fontSize="large"
@@ -225,7 +231,11 @@ const Test = (props) => {
     if (isEditMode) {
       return (
         <>
-          <input value={row[col]} onChange={fn} />
+          <input
+            className="px-4 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            value={row[col]}
+            onChange={fn}
+          />
         </>
       );
     } else {
@@ -258,7 +268,7 @@ const Test = (props) => {
         </>
       )}
       <input
-        className="px-4 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        className="px-4 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
         value={filename}
         placeholder="Enter filename"
         onChange={(e) => setFilename(e.target.value)}
@@ -280,26 +290,25 @@ const Test = (props) => {
               {data.map((row, i) => {
                 return (
                   <TableRow key={i}>
-                    {Object.keys(data[0]).map((col) => {
+                    {Object.keys(data[0]).map((col, index) => {
                       return (
                         <TableCell key={i + col}>
                           {renderTableCell(row, col, (e) =>
                             editRowCell(i, col, e.target.value)
                           )}
+                          {isEditMode && index === 0 && 
+                          (<DeleteRoundedIcon
+                            onClick={(e) => deleteRow(e, i)}
+                            fontSize="large"
+                            color="error"
+                          >
+                            Delete
+                          </DeleteRoundedIcon>
+                        )}
                         </TableCell>
                       );
                     })}
-                    {isEditMode && (
-                      <TableCell>
-                        <DeleteRoundedIcon
-                          onClick={(e) => deleteRow(e, i)}
-                          fontSize="large"
-                          color="error"
-                        >
-                          Delete
-                        </DeleteRoundedIcon>
-                      </TableCell>
-                    )}
+                    
                   </TableRow>
                 );
               })}

@@ -6,6 +6,7 @@ const tableSlice = createSlice({
     past: [],
     present: [],
     future: [],
+    beforeEdit: [],
   },
   reducers: {
     initialize: (state, action) => {
@@ -43,8 +44,22 @@ const tableSlice = createSlice({
         state.present = nextState;
       }
     },
+    captureStateBeforeEdit: (state) => {
+      state.beforeEdit = state.present;
+    },
+    revertBeforeEdit: (state) => {
+      state.present = state.beforeEdit;
+    },
   },
 });
 
-export const { initialize, updateCell, undo, redo } = tableSlice.actions;
+export const {
+  initialize,
+  updateCell,
+  undo,
+  redo,
+  captureStateBeforeEdit,
+  revertBeforeEdit,
+} = tableSlice.actions;
+
 export default tableSlice.reducer;
