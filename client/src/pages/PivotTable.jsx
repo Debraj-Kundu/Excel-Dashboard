@@ -18,20 +18,33 @@ const PivotTable = (props) => {
   let rows = [];
   const { id } = useParams();
 
-  useEffect(() => {
-    const getData = async (URL) => {
-      try {
-        const data = (await axios.get(URL, { withCredentials: true })).data;
-        setFile(data);
-        // console.log(data);
-      } catch (err) {
-        setErrMsg(err.response.data.message);
-      }
-    };
+  const getData = async () => {
+    try {
+      const data = (await axios.get(URL + "/" + id, { withCredentials: true }))
+        .data;
+      setFile(data);
+      // console.log(data);
+      setRows();
+    } catch (err) {
+      setErrMsg(err.response.data.message);
+    }
+  };
 
-    getData(URL + "/" + id);
+  useEffect(() => {
+    getData();
     return () => {};
   }, [id]);
+
+  function setRows() {
+    file.map((item, id) => {
+      let newItem = { id };
+      Object.keys(item).map(
+        (key) => (newItem = { ...newItem, [key]: item[key] })
+      );
+      rows = [...rows, newItem];
+      return null;
+    });
+  }
 
   file.map((item, id) => {
     let newItem = { id };
@@ -42,19 +55,24 @@ const PivotTable = (props) => {
     return null;
   });
 
+  function handleToggle() {
+    getData();
+    setToggleMode(!toggleMode);
+  }
+
   return (
     <div>
       {toggleMode ? (
         <button
           className="rounded-md bg-emerald-400 px-2 py-2 text-sm font-medium text-white shadow"
-          onClick={() => setToggleMode(!toggleMode)}
+          onClick={handleToggle}
         >
           <SwapVertIcon /> Sort Mode
         </button>
       ) : (
         <button
           className="rounded-md bg-emerald-400 px-2 py-2 text-sm font-medium text-white shadow"
-          onClick={() => setToggleMode(!toggleMode)}
+          onClick={handleToggle}
         >
           <VisibilityIcon /> View Mode
         </button>

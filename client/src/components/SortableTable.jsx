@@ -120,7 +120,7 @@ const SortableTable = (props) => {
   const [fixedColContainers, setFixedColContainers] = useState([]);
   // const [dragged, setDragged] = useState(false);
 
-  console.log("CONTAINERS - ", containers);
+  // console.log("CONTAINERS - ", containers);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
