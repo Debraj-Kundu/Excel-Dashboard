@@ -66,71 +66,89 @@ const Login = ({ login }) => {
   }
 
   return (
-    <div className="mt-12">
+    <div className="mt-10">
       {login ? (
-        <form
-          onSubmit={handleClick}
-          className="flex flex-col gap-4 items-center"
-        >
-          <TextField
-            id="outlined-basic"
-            label="Email address"
-            type="email"
-            name="email"
-            onChange={handleChange}
-            variant="outlined"
+        <div className="ml-20 flex gap-8 align-center">
+          <img
+            loading="lazy"
+            height="500px"
+            width="500px"
+            src={`${process.env.PUBLIC_URL}/Login.svg`}
+            alt="Login"
           />
-          <TextField
-            id="outlined-basic"
-            label="Password"
-            type="password"
-            name="password"
-            onChange={handleChange}
-            variant="outlined"
-          />
-          <button
-            className="rounded-md bg-emerald-400 px-5 py-2.5 text-sm font-medium text-white shadow"
-            type="submit"
+          <form
+            onSubmit={handleClick}
+            className="flex flex-col gap-4 items-center justify-center"
           >
-            Login
-          </button>
-        </form>
+            <TextField
+              id="outlined-basic"
+              label="Email address"
+              type="email"
+              name="email"
+              onChange={handleChange}
+              variant="outlined"
+            />
+            <TextField
+              id="outlined-basic"
+              label="Password"
+              type="password"
+              name="password"
+              onChange={handleChange}
+              variant="outlined"
+            />
+            <button
+              className="rounded-md bg-emerald-400 px-5 py-2.5 text-sm font-medium text-white shadow"
+              type="submit"
+            >
+              Login
+            </button>
+          </form>
+        </div>
       ) : (
-        <form
-          onSubmit={handleRegister}
-          className="flex flex-col gap-4 items-center"
-        >
-          <TextField
-            id="outlined-basic"
-            label="Name"
-            type="text"
-            name="name"
-            onChange={handleChange}
-            variant="outlined"
+        <div className="ml-20 flex gap-8 align-center">
+          <img
+            loading="lazy"
+            height="500px"
+            width="500px"
+            src={`${process.env.PUBLIC_URL}/Register.svg`}
+            alt="Register"
           />
-          <TextField
-            id="outlined-basic"
-            label="Email address"
-            type="email"
-            name="email"
-            onChange={handleChange}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-basic"
-            label="Password"
-            type="password"
-            name="password"
-            onChange={handleChange}
-            variant="outlined"
-          />
-          <button
-            type="submit"
-            className="rounded-md bg-emerald-400 px-5 py-2.5 text-sm font-medium text-white shadow"
+          <form
+            onSubmit={handleRegister}
+            className="flex flex-col gap-4 items-center justify-center"
           >
-            Register
-          </button>
-        </form>
+            <TextField
+              id="outlined-basic"
+              label="Name"
+              type="text"
+              name="name"
+              onChange={handleChange}
+              variant="outlined"
+            />
+            <TextField
+              id="outlined-basic"
+              label="Email address"
+              type="email"
+              name="email"
+              onChange={handleChange}
+              variant="outlined"
+            />
+            <TextField
+              id="outlined-basic"
+              label="Password"
+              type="password"
+              name="password"
+              onChange={handleChange}
+              variant="outlined"
+            />
+            <button
+              type="submit"
+              className="rounded-md bg-emerald-400 px-5 py-2.5 text-sm font-medium text-white shadow"
+            >
+              Register
+            </button>
+          </form>
+        </div>
       )}
     </div>
   );
